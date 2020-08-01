@@ -7,13 +7,36 @@
 // Revision: 0
 ///////////////////////////////////////////////////////////////////////
 
-#include "Sudoku.h"
+#include "SudokuSolver.h"
+#include "SudokuGenerator.h"
+
+using namespace std;
 
 int main()
 {
-	SudokuSolver sudoku{ "F://personalProjects/SudokuSolverV2/Debug/sudoku.txt" };
+	try {
+		//SudokuSolver sudoku{ "F://personalProjects/SudokuSolverV2/mySudoku.txt" };
+		//sudoku.Solve("sudoku.txt");
 
-	sudoku.Solve("F://solved.txt");
+		SudokuGenerator generator{};
+		generator.Generate("mySudoku5", 28, true);
+	}
+	catch (bad_alloc const& ex) {
+		cerr << ex.what() << endl;
+		return 1;
+	}	
+	catch (string const& ex) {
+		cerr << ex << endl;
+		return 1;
+	}
+	catch (exception const& ex) {
+		cerr << ex.what() << endl;
+		return 1;
+	}	
+	catch (...) {
+		cerr << "Unhandled exception!" << endl;
+		return 1;
+	}
 
 	return 0;
 }
